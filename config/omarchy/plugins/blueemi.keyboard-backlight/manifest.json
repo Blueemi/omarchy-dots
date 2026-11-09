@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "blueemi.keyboard-backlight",
+  "name": "Keyboard backlight",
+  "version": "1.0.0",
+  "author": "blueemi",
+  "description": "Keyboard backlight slider and on/off switch",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "Keyboard backlight",
+    "description": "Keyboard backlight slider and on/off switch",
+    "category": "System",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}

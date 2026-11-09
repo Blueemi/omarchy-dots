@@ -1,0 +1,24 @@
+#!/bin/sh
+# Light trackpad click feel, like macOS "Click: Light" (blueemi, 2026-11-08).
+# The driver (hid_magicmouse, Aurora kernel) plays the click tap itself
+# (haptic_press=Y) at strength 25 of 255 instead of the firmware's default.
+# The driver turns haptic_press back off if the actuator isn't ready yet,
+# so retry until it sticks. Undo: systemctl disable --now trackpad-light-click
+# and echo N > /sys/module/hid_magicmouse/parameters/haptic_press
+M=/sys/module/hid_magicmouse/parameters
+STRENGTH=25
+SOFTNESS=255   # smoother pulse = quieter click (2026-11-09; default 0 = 0x90)
+i=0
+while [ $i -lt 30 ]; do
+    if [ -w "$M/haptic_press" ]; then
+        echo $STRENGTH > $M/haptic_strength
+        echo $STRENGTH > $M/haptic_deep_strength
+        echo $SOFTNESS > $M/haptic_softness
+        echo Y > $M/haptic_press 2>/dev/null
+        sleep 0.5
+        [ "$(cat $M/haptic_press)" = Y ] && exit 0
+    fi
+    i=$((i + 1)); sleep 1
+done
+echo "trackpad-light-click: haptic_press did not stick" >&2
+exit 1

@@ -1,0 +1,8 @@
+{
+  "title": "Keyboard backlight",
+  "brightness": "Brightness",
+  "off": "Off",
+  "unavailable": "No keyboard backlight found",
+  "tooltip": "Keyboard backlight %1",
+  "tooltipOff": "Keyboard backlight off"
+}

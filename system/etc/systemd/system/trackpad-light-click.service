@@ -1,0 +1,10 @@
+[Unit]
+Description=Light, quiet trackpad click (host-played haptics, strength 25, softness 255)
+After=systemd-udev-settle.service systemd-modules-load.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/trackpad-light-click
+
+[Install]
+WantedBy=multi-user.target
